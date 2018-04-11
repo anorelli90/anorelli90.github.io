@@ -34,7 +34,7 @@ switch(command){
     myTweets();
     break;
 
-    case "spotify-this-song":
+    case "spotifyThisSong":
     mySpotify();
     break;
 
@@ -50,8 +50,20 @@ switch(command){
 // if the myTweets function is called
 
 function myTweets(){
-console.log("I tweeted!");
-};
+    var userName = process.argv[2]; 
+    var twitterURL = "https://api.twitter.com/1.1/search/tweets.json?q=" + userName + "&result_type=recent";
+    // var twitterURL = "twurl /1.1/search/tweets.json?q=" + userName + "&result_type=popular";
+    request(twitterURL, function(error, response, body) {
+        if(error){
+            console.log("Stop");
+        }
+        else{
+        console.log(JSON.parse(body).followers_count);
+        console.log("I tweeted!");
+        }
+    },
+    )}
+
 
 function movieThis(){
     if(process.argv.length > 4){
@@ -75,3 +87,12 @@ function movieThis(){
         // console.log( JSON.parse(body).Year);
         // console.log( JSON.parse(body).Year);
     });}
+
+    function mySpotify(); {
+        var spotifyURL = 0;
+        var song = 0;
+
+        request(spotifyURL, function(error, response, body ){
+            console.log(JSON.parse(body));
+        })
+    }
